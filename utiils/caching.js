@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const addObjectToCache = async (key, value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem(key, value);
+    await AsyncStorage.setItem(key, jsonValue);
     console.log(key, " object set");
   } catch (error) {
     console.error("Cache Error: ", error);
