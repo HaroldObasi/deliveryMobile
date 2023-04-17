@@ -8,7 +8,7 @@ import {
 import { API_URL } from "../../apiConfig";
 import authStyles from "../../styles/authStyles";
 import React, { useState } from "react";
-import { TextInput as MaterialTI, Button } from "react-native-paper";
+import { TextInput as MaterialTI } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { addObjectToCache } from "../../utiils/caching";
 
