@@ -4,20 +4,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect } from "react";
 import Login from "./screens/Login";
+import Signup from "./screens/Signup";
+import { readObjectFromCache } from "./utiils/caching";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem("user");
-      if (value !== null) {
-        console.log("there is a user object: ", value);
-      } else {
-        console.log("there is no user object: ", value);
-      }
-    } catch (e) {
-      console.log("cache read: ", e);
+    const user = await readObjectFromCache("user");
+    if (user !== null) {
+      console.log("user is present: ", user);
+    } else {
+      console.log("there is no present user");
     }
   };
 
@@ -28,7 +26,16 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

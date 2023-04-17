@@ -1,40 +1,36 @@
 import {
   Text,
   View,
-  TouchableOpacity,
   KeyboardAvoidingView,
+  TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { API_URL } from "../../apiConfig";
-import authStyles from "../../styles/authStyles";
+import { TextInput as MaterialTI } from "react-native-paper";
 import React, { useState } from "react";
-import { TextInput as MaterialTI, Button } from "react-native-paper";
+import authStyles from "../../styles/authStyles";
 import { useNavigation } from "@react-navigation/native";
-import { addObjectToCache } from "../../utiils/caching";
 
-const Login = () => {
+const Signup = () => {
+  const navigation = useNavigation();
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation();
-
-  const handleLogin = async (email, password) => {
-    try {
-      const response = await API_URL.post("user/signin", {
-        email: email,
-        password: password,
-      });
-      console.log("response: ", response.data);
-      addObjectToCache("user", response.data.user);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
+  const [confirmPassword, setConfirmPassword] = useState("");
   return (
     <SafeAreaView>
       <KeyboardAvoidingView style={authStyles.container} behavior="padding">
-        <Text style={authStyles.title}>Log In</Text>
+        <Text style={authStyles.title}>Create Account</Text>
 
+        <MaterialTI
+          label="First Name"
+          value={firstName}
+          mode="outlined"
+          onChangeText={(text) => setFirstName(text)}
+          selectionColor="#E05D5D"
+          underlineColor="#E05D5D"
+          activeOutlineColor="#E88787"
+          style={authStyles.input}
+        />
         <MaterialTI
           label="Email"
           value={email}
@@ -55,23 +51,31 @@ const Login = () => {
           activeOutlineColor="#E88787"
           style={authStyles.input}
         />
-
+        <MaterialTI
+          label="Confirm Password"
+          value={confirmPassword}
+          mode="outlined"
+          onChangeText={(text) => setConfirmPassword(text)}
+          selectionColor="#E05D5D"
+          underlineColor="#E05D5D"
+          activeOutlineColor="#E88787"
+          style={authStyles.input}
+        />
         <View style={authStyles.buttonholder}>
           <TouchableOpacity
             style={authStyles.button}
-            onPress={() => handleLogin(email, password)}
+            onPress={() => console.log("data")}
           >
-            <Text style={authStyles.text}>Log In</Text>
+            <Text style={authStyles.text}>Create Account</Text>
           </TouchableOpacity>
         </View>
-
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Signup");
+            navigation.navigate("Login");
           }}
         >
           <Text style={authStyles.alt}>
-            Don't have an account? {<Text>Create an account</Text>}
+            Already have an Account? {<Text>Login</Text>}
           </Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -79,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
