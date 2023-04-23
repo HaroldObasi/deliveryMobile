@@ -1,27 +1,51 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "../../private";
 import { theme } from "../../styles/theme";
+import TextInput from "../../components/ui/TextInput";
+import MapsACI from "../../components/ui/MapsACI";
+import { useGlobalContext } from "../../context";
 
 const CreateOrder = () => {
-  const [pickupPoint, setUpPickupPoint] = useState({});
+  const [isFocused, setIsFocused] = useState(false);
+
+  const [recipientName, setRecipientName] = useState("");
+  const [recipientNumber, setRecipientNumber] = useState(0);
+  const [description, setDescription] = useState("");
+  const [pickupPoint, setPickupPoint] = useState({
+    shortName: "",
+    longName: "",
+    long: 0,
+    lat: 0,
+  });
+  const [destination, setDestination] = useState({
+    shortName: "",
+    longName: "",
+    long: 0,
+    lat: 0,
+  });
+
+  const { user } = useGlobalContext();
 
   return (
-    <GooglePlacesAutocomplete
-      placeholder="Pickup"
-      minLength={2}
-      onFail={(err) => console.error(err)}
-      fetchDetails={true}
-      listViewDisplayed="auto"
-      onPress={(data, details = true) => {
-        console.log("i am here", data, details);
-      }}
-      query={{
-        key: GOOGLE_API_KEY,
-        language: "en",
-      }}
-    />
+    <ScrollView style={styles.container}>
+      <Text>Add your package's information!</Text>
+      <TextInput
+        label="Recipient Number"
+        onChangeText={(text) => {
+          setRecipientNumber(text);
+        }}
+      />
+      <TextInput
+        label="Recipient Name"
+        onChangeText={(text) => {
+          setRecipientName(text);
+        }}
+      />
+      <MapsACI placeholder="Pickup point" />
+      <MapsACI placeholder="Destination" />
+    </ScrollView>
   );
 };
 
@@ -33,4 +57,9 @@ const styles = StyleSheet.create({
     fontSize: theme.font.size.md,
     marginBottom: 3,
   },
+  container: {
+    height: "100%",
+    marginHorizontal: 10,
+  },
+  focusedTextInput: {},
 });
