@@ -1,15 +1,26 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-paper";
+import { Button as MaterialB } from "react-native-paper";
+import { theme } from "../../styles/theme";
 import React from "react";
 
-const Button = ({ children, buttonColor, textColor }) => {
+const Button = (props) => {
   return (
-    <View>
-      <Text>Button</Text>
-    </View>
+    <MaterialB
+      {...props}
+      buttonColor={theme.colors.primary.main}
+      style={styles.button}
+      mode="contained"
+    >
+      {props.children}
+    </MaterialB>
   );
 };
 
 export default Button;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  button: {
+    borderRadius: 8,
+    // backgroundColor: theme.colors.primary.main,
+  },
+});
