@@ -18,6 +18,7 @@ const Login = () => {
   const navigation = useNavigation();
 
   const handleLogin = async (email, password) => {
+    console.log("starting log in");
     try {
       const response = await API_URL.post("user/signin", {
         email: email,
