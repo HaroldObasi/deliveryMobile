@@ -7,6 +7,7 @@ const TextInput = (props) => {
   return (
     <MaterialTI
       {...props}
+      style={styles.input}
       activeOutlineColor={theme.colors.primary.main}
       mode="outlined"
       outlineColor={theme.colors.grey[300]}
@@ -16,4 +17,8 @@ const TextInput = (props) => {
 
 export default TextInput;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  input: {
+    marginVertical: 5,
+  },
+});
