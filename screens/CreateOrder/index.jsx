@@ -4,7 +4,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_API_KEY } from "../../private";
 import { theme } from "../../styles/theme";
 import TextInput from "../../components/ui/TextInput";
-import MapsACI from "../../components/ui/MapsACI";
+// import MapsACI from "../../components/ui/MapsACI";
 import { useGlobalContext } from "../../context";
 
 const CreateOrder = () => {
@@ -30,7 +30,7 @@ const CreateOrder = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text>Add your package's information!</Text>
+      <Text>Add your package's information</Text>
       <TextInput
         label="Recipient Number"
         onChangeText={(text) => {
@@ -43,8 +43,8 @@ const CreateOrder = () => {
           setRecipientName(text);
         }}
       />
-      <MapsACI placeholder="Pickup point" />
-      <MapsACI placeholder="Destination" />
+      {/* <MapsACI placeholder="Pickup point" />
+      <MapsACI placeholder="Destination" /> */}
     </ScrollView>
   );
 };
