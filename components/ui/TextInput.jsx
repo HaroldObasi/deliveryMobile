@@ -19,6 +19,6 @@ export default TextInput;
 
 const styles = StyleSheet.create({
   input: {
-    marginVertical: 5,
+    marginBottom: 2,
   },
 });

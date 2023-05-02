@@ -7,7 +7,7 @@ const Button = (props) => {
   return (
     <MaterialB
       {...props}
-      buttonColor={theme.colors.primary.main}
+      buttonColor={props.buttonColor || theme.colors.primary.main}
       style={styles.button}
       mode="contained"
     >
