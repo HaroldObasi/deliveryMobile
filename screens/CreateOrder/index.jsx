@@ -12,7 +12,9 @@ const CreateOrder = () => {
 
   const [recipientName, setRecipientName] = useState("");
   const [recipientNumber, setRecipientNumber] = useState(0);
+  const [weight, setWeight] = useState(0);
   const [description, setDescription] = useState("");
+
   const [pickupPoint, setPickupPoint] = useState({
     shortName: "",
     longName: "",
@@ -32,17 +34,30 @@ const CreateOrder = () => {
     <ScrollView style={styles.container}>
       <Text>Add your package's information</Text>
       <TextInput
+        label="Recipient Name"
+        onChangeText={(text) => {
+          setRecipientName(text);
+        }}
+      />
+      <TextInput
         label="Recipient Number"
         onChangeText={(text) => {
           setRecipientNumber(text);
         }}
       />
       <TextInput
-        label="Recipient Name"
+        label="Recipient Number"
         onChangeText={(text) => {
-          setRecipientName(text);
+          setRecipientNumber(text);
         }}
       />
+      <TextInput
+        label="Recipient Number"
+        onChangeText={(text) => {
+          setRecipientNumber(text);
+        }}
+      />
+
       {/* <MapsACI placeholder="Pickup point" />
       <MapsACI placeholder="Destination" /> */}
     </ScrollView>
