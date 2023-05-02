@@ -20,6 +20,11 @@ export const theme = {
       light: "#E5FCF6",
       dark: "#26704C",
     },
+    error: {
+      light: "#FFD8D6",
+      main: "#FF2635",
+      dark: "#A81414",
+    },
   },
   font: {
     size: {
