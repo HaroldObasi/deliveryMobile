@@ -3,10 +3,12 @@ import { useGlobalContext } from "../../context";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { Button as MaterialB } from "react-native-paper";
+import { signout } from "./helpers";
 import Button from "../../components/ui/Button";
+import { theme } from "../../styles/theme";
 
 const InfoCard = () => {
-  const { user } = useGlobalContext();
+  const { user, setUser } = useGlobalContext();
   return (
     <View style={styles.card}>
       <Avatar.Text size={70} label={user.fullName[0]} />
@@ -24,6 +26,14 @@ const InfoCard = () => {
       ) : (
         <>This user is a Courier</>
       )}
+      <Button
+        onPress={() => {
+          signout(setUser);
+        }}
+        buttonColor={theme.colors.error.main}
+      >
+        Signout
+      </Button>
     </View>
   );
 };
