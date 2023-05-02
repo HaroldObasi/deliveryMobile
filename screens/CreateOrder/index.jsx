@@ -6,9 +6,11 @@ import { theme } from "../../styles/theme";
 import TextInput from "../../components/ui/TextInput";
 // import MapsACI from "../../components/ui/MapsACI";
 import { useGlobalContext } from "../../context";
+import { TextInput as RnTextInput } from "react-native";
 
 const CreateOrder = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const [text, setText] = useState("desc");
 
   const [recipientName, setRecipientName] = useState("");
   const [recipientNumber, setRecipientNumber] = useState(0);
@@ -46,18 +48,19 @@ const CreateOrder = () => {
         }}
       />
       <TextInput
-        label="Recipient Number"
+        label="Weight"
         onChangeText={(text) => {
-          setRecipientNumber(text);
+          setWeight(text);
         }}
       />
       <TextInput
-        label="Recipient Number"
+        label="Description"
         onChangeText={(text) => {
-          setRecipientNumber(text);
+          setDescription(text);
         }}
+        multiline
+        numberOfLines={4}
       />
-
       {/* <MapsACI placeholder="Pickup point" />
       <MapsACI placeholder="Destination" /> */}
     </ScrollView>
@@ -77,4 +80,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   focusedTextInput: {},
+  textarea: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    fontSize: 16,
+  },
 });
