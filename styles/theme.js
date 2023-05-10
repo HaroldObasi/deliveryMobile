@@ -35,5 +35,20 @@ export const theme = {
       xl: 30,
       xxl: 35,
     },
+    spacing: {
+      xxs: 7,
+      xs: 10,
+      sm: 15,
+      md: 20,
+      lg: 25,
+      xl: 30,
+      xxl: 35,
+    },
+
+    weight: {
+      light: 200,
+      medium: 400,
+      bold: 600,
+    },
   },
 };

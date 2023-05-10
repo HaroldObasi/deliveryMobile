@@ -9,6 +9,7 @@ const OrdersList = ({ orders }) => {
       <Text style={styles.heading}>Orders Created</Text>
       <FlatList
         data={orders}
+        horizontal
         renderItem={({ item }) => <OrderItem item={item} />}
       />
     </View>
@@ -20,7 +21,7 @@ export default OrdersList;
 const styles = StyleSheet.create({
   container: {
     marginTop: theme.font.size.xl,
-    marginHorizontal: theme.font.size.sm,
+    // marginHorizontal: theme.font.size.sm,
   },
   heading: {
     textAlign: "center",

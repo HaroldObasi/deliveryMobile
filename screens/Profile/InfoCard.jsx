@@ -24,7 +24,7 @@ const InfoCard = () => {
           </Button>
         </>
       ) : (
-        <>This user is a Courier</>
+        <Text>This user is a Courier</Text>
       )}
       <Button
         onPress={() => {

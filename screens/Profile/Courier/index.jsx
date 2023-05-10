@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-
+import InfoCard from "../InfoCard";
 const Courier = () => {
   return (
     <View>
-      <Text>Courier</Text>
+      <InfoCard />
     </View>
   );
 };

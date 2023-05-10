@@ -11,7 +11,7 @@ const Home = () => {
     return <BaseUser />;
   }
   if (user.role === "COURIER") {
-    return <Courier />;
+    return <CourierHome />;
   }
 
   return (
