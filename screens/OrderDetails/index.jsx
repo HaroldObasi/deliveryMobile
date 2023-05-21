@@ -49,12 +49,12 @@ const OrderDetails = ({ route }) => {
           </Text>
         )
       ) : (
-        <>a courier</>
+        <Text>a courier</Text>
       )}
 
       <View>
-        <Text>Client Name: {data.recipientName}</Text>
-        <Text>Client Number: {data.recipientNumber}</Text>
+        <Text>Recipient Name: {data.recipientName}</Text>
+        <Text>Recipient Number: {data.recipientNumber}</Text>
       </View>
 
       <Text style={{ fontSize: theme.font.size.md, marginVertical: 5 }}>

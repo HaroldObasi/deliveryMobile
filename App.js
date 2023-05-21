@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import { AppProvider } from "./context";
 import Main from "./Main";
 
@@ -9,7 +8,3 @@ export default function App() {
     </AppProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});

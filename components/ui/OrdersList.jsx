@@ -3,14 +3,15 @@ import { theme } from "../../styles/theme";
 import OrderItem from "./OrderItem";
 import React from "react";
 
-const OrdersList = ({ orders }) => {
+const OrdersList = ({ orders, title }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Orders Created</Text>
+      <Text style={styles.heading}>{title}</Text>
       <FlatList
         data={orders}
         horizontal
         renderItem={({ item }) => <OrderItem item={item} />}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );
@@ -24,8 +25,9 @@ const styles = StyleSheet.create({
     // marginHorizontal: theme.font.size.sm,
   },
   heading: {
-    textAlign: "center",
-    fontSize: theme.font.size.lg,
+    fontSize: theme.font.size.sm,
     marginBottom: theme.font.size.sm,
+    fontWeight: theme.font.weight.bold,
+    paddingHorizontal: theme.font.spacing.xxs,
   },
 });

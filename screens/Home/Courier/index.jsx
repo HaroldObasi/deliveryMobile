@@ -51,9 +51,8 @@ const CourierHome = () => {
         <Text>{formatDate(Date.now())} </Text>
       </View>
 
-      <Text>Open orders</Text>
-      <OrdersList orders={openOrders} />
-      <SkeletonLoader />
+      <OrdersList orders={openOrders} title={"Open Orders"} />
+      <OrdersList orders={activeOrders} title={"Your active Orders"} />
     </View>
   );
 };

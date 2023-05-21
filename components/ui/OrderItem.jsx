@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { theme } from "../../styles/theme";
 import { useNavigation } from "@react-navigation/native";
-import { Chip } from "react-native-paper";
+import { Chip as MaterialC } from "react-native-paper";
+import Chip from "./Chip";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 
@@ -37,7 +38,7 @@ const OrderItem = ({ item }) => {
         <MaterialCommunityIcons
           name="truck-fast-outline"
           size={24}
-          color="black"
+          color={theme.colors.primary.main}
           style={{
             flex: 1,
             textAlign: "center",
@@ -58,36 +59,18 @@ const OrderItem = ({ item }) => {
         </Text>
       </View>
 
-      {item.delivered === true ? (
-        <Chip>Delivered!</Chip>
-      ) : (
-        <Chip
-          icon="information"
-          style={{
-            backgroundColor: theme.colors.success.light,
-            flexDirection: "row",
-            justifyContent: "center",
-            // flex: 1,
-          }}
-        >
-          <Text style={{ textAlign: "center", marginHorizontal: "auto" }}>
-            Order
-          </Text>
-        </Chip>
-      )}
-
-      <Text style={styles.text}>
-        Order Status:
-        {item.delivered === true ? (
-          <Text> Delivered </Text>
+      {
+        item.delivered === true ? (
+          <Chip status={"Order delivered"}> </Chip>
+        ) : item.assignedCourier._id === null ? (
+          <Chip status={"Awaiting delivery"}> </Chip>
         ) : (
-          <Text> Ongoing </Text>
-        )}{" "}
-      </Text>
+          <Chip status={"Courier assigned"}> </Chip>
+        )
+        // <Chip status={"Order awaiting delivery"}> </Chip>
+      }
 
-      <Text multiline style={styles.text}>
-        Description: {item.description}
-      </Text>
+      <Text style={styles.description}>Description: {item.description}</Text>
     </TouchableOpacity>
   );
 };
@@ -99,12 +82,17 @@ const styles = StyleSheet.create({
     marginBottom: theme.font.size.md,
     padding: theme.font.size.md,
     borderRadius: theme.font.size.xs,
-    backgroundColor: theme.colors.primary.light,
+    borderColor: theme.colors.error.light,
+    borderWidth: 1,
+    backgroundColor: "#E6E6E6",
     width: 300,
-    marginHorizontal: theme.font.spacing.sm,
+    marginHorizontal: theme.font.spacing.xs,
   },
   text: {
     fontSize: theme.font.size.sm,
+  },
+  description: {
+    fontSize: theme.font.size.xs,
   },
   address: {
     flexDirection: "row",

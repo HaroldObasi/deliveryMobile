@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useGlobalContext } from "./context";
@@ -9,7 +8,7 @@ import React, { useEffect } from "react";
 
 const Main = () => {
   const Stack = createNativeStackNavigator();
-  const { user, setUser } = useGlobalContext();
+  const { user } = useGlobalContext();
 
   useEffect(() => {
     console.log("user state changed");
