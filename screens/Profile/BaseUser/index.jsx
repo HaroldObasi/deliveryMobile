@@ -1,21 +1,20 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { useGlobalContext } from "../../../context";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../../apiConfig";
 import InfoCard from "../InfoCard";
 import OrdersList from "../../../components/ui/OrdersList";
+import { FAB } from "react-native-paper";
+import { theme } from "../../../styles/theme";
 
 const BaseUser = () => {
   const { user } = useGlobalContext();
   const [userPackages, setUserPackages] = useState([]);
 
   const fetchUserPackages = async () => {
-    console.log("user packages being fetched");
     try {
       const response = await API_URL.get(`package/packagesByUser/${user._id}`);
-      console.log("response: ", response.data);
       setUserPackages(response.data);
-      console.log("user packages: ", userPackages);
     } catch (error) {
       console.error(error);
     } finally {
@@ -26,12 +25,31 @@ const BaseUser = () => {
   useEffect(() => {
     fetchUserPackages();
   }, []);
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <InfoCard />
-      <OrdersList orders={userPackages} />
+      <OrdersList title={"All your previous orders"} orders={userPackages} />
+      <FAB
+        icon="power"
+        style={styles.fab}
+        onPress={() => console.log("Pressed")}
+      />
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: theme.colors.error.light,
+  },
+});
 
 export default BaseUser;
