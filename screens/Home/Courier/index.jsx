@@ -7,10 +7,12 @@ import { ActivityIndicator } from "react-native-paper";
 import SkeletonLoader from "../../../components/ui/SkeletonLoader";
 import { formatDate } from "../../../utiils/dates";
 import { API_URL } from "../../../apiConfig";
+import { useIsFocused } from "@react-navigation/native";
 
 const CourierHome = () => {
   const { user, setUser } = useGlobalContext();
   const [openOrders, setOpenOrders] = useState([]);
+  const isFocused = useIsFocused();
   const [openOrdersLoading, setOpenOrdersLoading] = useState(true);
 
   const [activeOrders, setActiveOrders] = useState([]);
@@ -40,9 +42,12 @@ const CourierHome = () => {
   };
 
   useEffect(() => {
-    getOpenOrders();
-    getActiveOrders();
-  }, []);
+    if (isFocused) {
+      getOpenOrders();
+      getActiveOrders();
+      console.log("focusss");
+    }
+  }, [isFocused]);
 
   return (
     <View>
