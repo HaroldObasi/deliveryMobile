@@ -30,7 +30,10 @@ const OrderDetails = ({ route }) => {
     fetchOrderQuotes();
   }, []);
 
-  if (user.role === "USER") return <BaseUserOrderDetails />;
+  if (user.role === "USER")
+    return (
+      <BaseUserOrderDetails orderDetails={data} orderQuotes={orderQuotes} />
+    );
 
   if (user.role === "COURIER") {
     return (

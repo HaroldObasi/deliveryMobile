@@ -1,7 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React, { useState } from "react";
+import GeneralOrderInfo from "../GeneralOrderInfo";
+import { theme } from "../../../styles/theme";
+import { useGlobalContext } from "../../../context";
+import { useNavigation } from "@react-navigation/native";
 
-const BaseUserOrderDetails = () => {
+const BaseUserOrderDetails = ({ orderDetails, orderQuotes }) => {
+  const { user } = useGlobalContext();
   return (
     <View>
       <Text>BaseUserOrderDetails</Text>
