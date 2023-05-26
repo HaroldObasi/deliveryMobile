@@ -1,9 +1,18 @@
 import React from "react";
-import { Alert, Modal as RNmodal, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Modal as RNmodal,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { theme } from "../../styles/theme";
+import { IconButton } from "react-native";
 import Button from "./Button";
 import TextInput from "./TextInput";
 import { TextInput as MaterialTI } from "react-native-paper";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Modal = ({ modalVisible, setModalVisible, children, title }) => {
   return (
@@ -18,7 +27,27 @@ const Modal = ({ modalVisible, setModalVisible, children, title }) => {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>{title}</Text>
+          <View>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: 10,
+              }}
+            >
+              <Text style={styles.modalText}>{title}</Text>
+
+              <TouchableOpacity
+                style={{ align: "flex-end" }}
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <MaterialCommunityIcons name="close" color="black" size={24} />
+              </TouchableOpacity>
+            </View>
+          </View>
           {children}
         </View>
       </View>
@@ -52,7 +81,7 @@ const styles = StyleSheet.create({
   },
 
   modalText: {
-    marginBottom: 15,
+    flex: 1,
     textAlign: "center",
     fontSize: theme.font.size.sm,
     fontWeight: theme.font.weight.bold,
