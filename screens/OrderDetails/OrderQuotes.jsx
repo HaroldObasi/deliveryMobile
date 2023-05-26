@@ -15,7 +15,7 @@ const OrderQuotes = ({ quotes, quotesLoading }) => {
         <></>
       )}
 
-      {quotes.length > 0 ? (
+      {quotes && quotes.length > 0 ? (
         <View>
           <Text style={{ marginBottom: 5 }}>Quotes made on this order</Text>
           <FlatList

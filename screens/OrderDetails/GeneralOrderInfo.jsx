@@ -76,7 +76,31 @@ const GeneralOrderInfo = ({ order }) => {
 
       {user.role === "USER" ? (
         order?.assignedCourier?._id === null ? (
-          <Text style={{ marginVertical: 5 }}>No couriers assigned</Text>
+          <View
+            style={{
+              backgroundColor: theme.colors.error.light,
+              paddingVertical: 10,
+              borderRadius: 8,
+              marginVertical: 10,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <MaterialCommunityIcons
+              name="alert-outline"
+              size={24}
+              color={theme.colors.error.dark}
+            />
+            <Text
+              style={{
+                fontSize: 15,
+                color: theme.colors.error.dark,
+              }}
+            >
+              No Courier has been assigned to this yet
+            </Text>
+          </View>
         ) : (
           <Text style={{ marginVertical: 5 }}>
             Assigned courier: {order?.assignedCourier?.fullName}

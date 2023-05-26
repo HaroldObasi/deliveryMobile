@@ -11,12 +11,18 @@ const QuoteItem = ({ item }) => {
           <Text style={styles.quoteInfo}>
             Created by: {item.createdBy.fullName || item.createdBy.email}
           </Text>
-          <Text style={styles.quoteInfo}>Price: {item.quotePrice}</Text>
+          <Text style={styles.quoteInfo}>Price ($): {item.quotePrice}</Text>
           <Text style={styles.quoteInfo}>
             Estimated time for delivery: {item.timeEstimate + " days"}
           </Text>
         </View>
-        <Text style={{ fontSize: theme.font.size.sm }}>{item.comment}</Text>
+        <Text
+          numberOfLines={3}
+          style={{ fontSize: theme.font.size.sm, width: "80%" }}
+          ellipsizeMode="tail"
+        >
+          {item.comment}
+        </Text>
       </View>
       <View style={{ alignSelf: "center" }}>
         <Button>Accept</Button>
