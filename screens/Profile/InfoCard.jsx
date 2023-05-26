@@ -6,6 +6,7 @@ import { Button as MaterialB } from "react-native-paper";
 import { signout } from "./helpers";
 import Button from "../../components/ui/Button";
 import { theme } from "../../styles/theme";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const InfoCard = () => {
   const { user, setUser } = useGlobalContext();
@@ -34,14 +35,35 @@ const InfoCard = () => {
       ) : (
         <Text>Role: Courier</Text>
       )}
-      {/* <Button
-        onPress={() => {
-          signout(setUser);
+
+      <View
+        style={{
+          backgroundColor: "white",
+          paddingVertical: 15,
+          paddingHorizontal: 15,
+          borderRadius: 8,
+          marginBottom: 10,
+          marginTop: 20,
+          flexDirection: "row",
+          width: "100%",
+          alignItems: "center",
         }}
-        buttonColor={theme.colors.error.main}
       >
-        Signout
-      </Button> */}
+        <MaterialCommunityIcons
+          name="email-outline"
+          size={24}
+          color={theme.colors.text.body}
+        />
+        <Text
+          style={{
+            fontSize: 15,
+            paddingLeft: 20,
+            color: theme.colors.text.body,
+          }}
+        >
+          {user.email}
+        </Text>
+      </View>
     </View>
   );
 };
