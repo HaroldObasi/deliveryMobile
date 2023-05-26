@@ -6,9 +6,10 @@ import InfoCard from "../InfoCard";
 import OrdersList from "../../../components/ui/OrdersList";
 import { FAB } from "react-native-paper";
 import { theme } from "../../../styles/theme";
+import { signout } from "../helpers";
 
 const BaseUser = () => {
-  const { user } = useGlobalContext();
+  const { user, setUser } = useGlobalContext();
   const [userPackages, setUserPackages] = useState([]);
 
   const fetchUserPackages = async () => {
@@ -30,11 +31,7 @@ const BaseUser = () => {
     <SafeAreaView style={styles.container}>
       <InfoCard />
       <OrdersList title={"All your previous orders"} orders={userPackages} />
-      <FAB
-        icon="power"
-        style={styles.fab}
-        onPress={() => console.log("Pressed")}
-      />
+      <FAB icon="power" style={styles.fab} onPress={() => signout(setUser)} />
     </SafeAreaView>
   );
 };
