@@ -5,13 +5,23 @@ import { theme } from "../../../styles/theme";
 import { useGlobalContext } from "../../../context";
 import { useNavigation } from "@react-navigation/native";
 import OrderQuotes from "../OrderQuotes";
+import ReviewForm from "./ReviewForm";
 
 const BaseUserOrderDetails = ({ orderDetails, orderQuotes }) => {
   const { user } = useGlobalContext();
   return (
     <View style={styles.container}>
       <GeneralOrderInfo order={orderDetails} />
-      <OrderQuotes quotes={orderQuotes} />
+
+      {orderDetails && orderDetails.assignedCourier._id !== null ? (
+        orderDetails.delivered === true ? (
+          <ReviewForm orderDetails={orderDetails} />
+        ) : (
+          <Text>Order is in progress</Text>
+        )
+      ) : (
+        <OrderQuotes quotes={orderQuotes} />
+      )}
     </View>
   );
 };

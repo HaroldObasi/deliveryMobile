@@ -103,7 +103,8 @@ const GeneralOrderInfo = ({ order }) => {
           </View>
         ) : (
           <Text style={{ marginVertical: 5 }}>
-            Assigned courier: {order?.assignedCourier?.fullName}
+            Assigned courier:{" "}
+            {order?.assignedCourier?.fullName || order?.assignedCourier?.email}
           </Text>
         )
       ) : (
