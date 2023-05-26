@@ -23,7 +23,7 @@ const Login = () => {
     console.log("starting log in");
     try {
       const response = await API_URL.post("user/signin", {
-        email: email,
+        email: email.toLowerCase(),
         password: password,
       });
       console.log("response: ", response.data);
