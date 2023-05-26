@@ -9,7 +9,11 @@ export default HomeNavigator = () => {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="HomePage" component={Home} />
+      <Stack.Screen
+        name="HomePage"
+        options={{ headerShown: false }}
+        component={Home}
+      />
       <Stack.Screen name="CreateOrder" component={CreateOrder} />
       <Stack.Screen name="OrderDetails" component={OrderDetails} />
     </Stack.Navigator>

@@ -8,8 +8,18 @@ export default ProfileNavigator = () => {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="OrderDetails" component={OrderDetails} />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Profile"
+        component={Profile}
+      />
+      <Stack.Screen
+        name="OrderDetails"
+        options={{
+          title: "",
+        }}
+        component={OrderDetails}
+      />
     </Stack.Navigator>
   );
 };
