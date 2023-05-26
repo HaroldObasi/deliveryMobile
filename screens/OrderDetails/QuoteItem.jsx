@@ -1,9 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import React from "react";
 import { theme } from "../../styles/theme";
 import Button from "../../components/ui/Button";
+import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "../../apiConfig";
 
 const QuoteItem = ({ item }) => {
+  const navigation = useNavigation();
+
+  const handleAcceptQuote = async () => {
+    try {
+      await API_URL.post(`quote/accept`, {
+        quotedOrder: item.quotedOrder,
+        courierToBeAssigned: item.createdBy._id,
+      });
+      Alert.alert("Quote successfully accepted");
+    } catch (error) {
+      Alert.alert("Something went wrong");
+      console.error(error);
+    } finally {
+      navigation.goBack();
+    }
+  };
+
   return (
     <View style={styles.quoteItem}>
       <View>
@@ -25,7 +44,7 @@ const QuoteItem = ({ item }) => {
         </Text>
       </View>
       <View style={{ alignSelf: "center" }}>
-        <Button>Accept</Button>
+        <Button onPress={handleAcceptQuote}>Accept</Button>
       </View>
     </View>
   );
