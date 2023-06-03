@@ -12,6 +12,7 @@ const MapsACI = (props) => {
           color: "#5d5d5d",
           fontSize: 15,
           paddingHorizontal: 15,
+          marginTop: 2,
           height: 50,
           borderWidth: 1,
           borderColor: "grey",
@@ -25,7 +26,12 @@ const MapsACI = (props) => {
       fetchDetails={true}
       listViewDisplayed="auto"
       onPress={(data, details = true) => {
-        console.log("i am here", data, details);
+        props.setLocation({
+          shortName: details.name,
+          longName: details.formatted_address,
+          long: details.geometry.location.lng,
+          lat: details.geometry.location.lat,
+        });
       }}
       query={{
         key: GOOGLE_API_KEY,
