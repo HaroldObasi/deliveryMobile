@@ -7,13 +7,15 @@ import { API_URL } from "../../apiConfig";
 
 const QuoteItem = ({ item }) => {
   const navigation = useNavigation();
+  console.log("order details: ", item);
 
   const handleAcceptQuote = async () => {
     try {
-      await API_URL.post(`quote/accept`, {
-        quotedOrder: item.quotedOrder,
-        courierToBeAssigned: item.createdBy._id,
+      const response = await API_URL.post(`quote/accept`, {
+        quotedOrder: item.orderQuoted,
+        courierToBeAssigned: item.createdBy,
       });
+      console.log("response", response.data);
       Alert.alert("Quote successfully accepted");
     } catch (error) {
       Alert.alert("Something went wrong");
