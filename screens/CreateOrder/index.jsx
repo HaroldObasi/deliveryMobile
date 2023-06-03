@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Alert,
+} from "react-native";
 import React, { useState } from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "../../private";
@@ -7,6 +14,8 @@ import TextInput from "../../components/ui/TextInput";
 import MapsACI from "../../components/ui/MapsACI";
 import { useGlobalContext } from "../../context";
 import { TextInput as RnTextInput } from "react-native";
+import Button from "../../components/ui/Button";
+import { API_URL } from "../../apiConfig";
 
 const CreateOrder = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -32,43 +41,68 @@ const CreateOrder = () => {
 
   const { user } = useGlobalContext();
 
-  return (
-    <ScrollView
-      style={styles.container}
-      // scrollEnabled={false}
-      keyboardShouldPersistTaps="handled"
-    >
-      <Text>Add your package's information</Text>
-      <TextInput
-        label="Recipient Name"
-        onChangeText={(text) => {
-          setRecipientName(text);
-        }}
-      />
-      <TextInput
-        label="Recipient Number"
-        onChangeText={(text) => {
-          setRecipientNumber(text);
-        }}
-      />
-      <TextInput
-        label="Weight"
-        onChangeText={(text) => {
-          setWeight(text);
-        }}
-      />
-      <TextInput
-        label="Description"
-        onChangeText={(text) => {
-          setDescription(text);
-        }}
-        multiline
-        numberOfLines={4}
-      />
-      <MapsACI placeholder="Pickup point" />
+  const handleSubmitOrder = async () => {
+    try {
+      orderData = {
+        recipientName,
+        recipientNumber,
+        weight,
+        pickupPoint,
+        destination,
+        description,
+        createdBy: {
+          id: user._id,
+          email: user.email,
+          name: user.fullName || user.email,
+        },
+      };
+      const response = await API_URL.post("package/create", orderData);
+      Alert.alert("Package successfully created");
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Something went wrong");
+    }
+  };
 
-      {/* <MapsACI placeholder="Destination" />  */}
-    </ScrollView>
+  return (
+    <SafeAreaView>
+      <ScrollView
+        style={styles.container}
+        // scrollEnabled={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Text>Add your package's information</Text>
+        <TextInput
+          label="Recipient Name"
+          onChangeText={(text) => {
+            setRecipientName(text);
+          }}
+        />
+        <TextInput
+          label="Recipient Number"
+          onChangeText={(text) => {
+            setRecipientNumber(text);
+          }}
+        />
+        <TextInput
+          label="Weight"
+          onChangeText={(text) => {
+            setWeight(text);
+          }}
+        />
+        <TextInput
+          label="Description"
+          onChangeText={(text) => {
+            setDescription(text);
+          }}
+          multiline
+          numberOfLines={4}
+        />
+        <MapsACI placeholder="Pickup point" setLocation={setPickupPoint} />
+        <MapsACI placeholder="Destination" setLocation={setDestination} />
+        <Button onPress={handleSubmitOrder}>Submit</Button>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
