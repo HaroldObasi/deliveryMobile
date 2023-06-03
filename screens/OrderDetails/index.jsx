@@ -17,7 +17,6 @@ const OrderDetails = ({ route }) => {
   const fetchOrderQuotes = async () => {
     try {
       const response = await API_URL.get(`quote/quotesBy/${data._id}`);
-      console.log("quotes response: ", response.data);
       setOrderQuotes(response.data);
     } catch (error) {
       console.error(error);

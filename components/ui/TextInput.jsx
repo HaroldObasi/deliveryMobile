@@ -20,5 +20,6 @@ export default TextInput;
 const styles = StyleSheet.create({
   input: {
     marginBottom: 2,
+    backgroundColor: "white",
   },
 });

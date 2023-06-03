@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import GeneralOrderInfo from "../GeneralOrderInfo";
 import { theme } from "../../../styles/theme";
@@ -12,17 +12,50 @@ const CourierOrderDetails = ({ orderDetails, orderQuotes, quotesLoading }) => {
   const { user } = useGlobalContext();
   console.log("order details: ", orderDetails);
   return (
-    <ScrollView style={styles.container}>
-      <GeneralOrderInfo order={orderDetails} />
-
-      {hasUserQuotedOrder(orderQuotes, user) ? (
-        orderDetails?.assignedCourier?._id === user._id ? (
-          orderDetails.delivered === true ? (
+    <SafeAreaView>
+      <ScrollView style={styles.container}>
+        <GeneralOrderInfo order={orderDetails} />
+        {hasUserQuotedOrder(orderQuotes, user) ? (
+          orderDetails?.assignedCourier?._id === user._id ? (
+            orderDetails.delivered === true ? (
+              <View
+                style={{
+                  backgroundColor: theme.colors.success.light,
+                  paddingVertical: 20,
+                  paddingHorizontal: 10,
+                  borderRadius: 8,
+                  marginVertical: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 15,
+                    color: theme.colors.success.dark,
+                  }}
+                >
+                  You have successfully delivered this order, Congrats !
+                </Text>
+              </View>
+            ) : (
+              <UserMap
+                region={{
+                  origin: {
+                    longitude: orderDetails.pickupPoint.long,
+                    latitude: orderDetails.pickupPoint.lat,
+                  },
+                  destination: {
+                    longitude: orderDetails.destination.long,
+                    latitude: orderDetails.destination.lat,
+                  },
+                }}
+                orderDetails={orderDetails}
+              />
+            )
+          ) : (
             <View
               style={{
-                backgroundColor: theme.colors.success.light,
-                paddingVertical: 20,
-                paddingHorizontal: 10,
+                backgroundColor: theme.colors.error.light,
+                padding: 10,
                 borderRadius: 8,
                 marginVertical: 10,
               }}
@@ -30,51 +63,19 @@ const CourierOrderDetails = ({ orderDetails, orderQuotes, quotesLoading }) => {
               <Text
                 style={{
                   fontSize: 15,
-                  color: theme.colors.success.dark,
+                  color: theme.colors.error.dark,
                 }}
               >
-                You have successfully delivered this order, Congrats !
+                You have already quoted the order, you will be notified if you
+                get accepted
               </Text>
             </View>
-          ) : (
-            <UserMap
-              region={{
-                origin: {
-                  longitude: orderDetails.pickupPoint.long,
-                  latitude: orderDetails.pickupPoint.lat,
-                },
-                destination: {
-                  longitude: orderDetails.destination.long,
-                  latitude: orderDetails.destination.lat,
-                },
-              }}
-              orderDetails={orderDetails}
-            />
           )
         ) : (
-          <View
-            style={{
-              backgroundColor: theme.colors.error.light,
-              padding: 10,
-              borderRadius: 8,
-              marginVertical: 10,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 15,
-                color: theme.colors.error.dark,
-              }}
-            >
-              You have already quoted the order, you will be notified if you get
-              accepted
-            </Text>
-          </View>
-        )
-      ) : (
-        <QuoteForm orderDetails={orderDetails} />
-      )}
-    </ScrollView>
+          <QuoteForm orderDetails={orderDetails} />
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

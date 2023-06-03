@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { theme } from "../../../styles/theme";
 import { useGlobalContext } from "../../../context";
 import { useEffect, useState } from "react";
@@ -45,12 +45,11 @@ const CourierHome = () => {
     if (isFocused) {
       getOpenOrders();
       getActiveOrders();
-      console.log("focusss");
     }
   }, [isFocused]);
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.titleLine}>
         <Text style={styles.title}>Welcome {user.fullName}</Text>
         <Text>{formatDate(Date.now())} </Text>
@@ -58,7 +57,7 @@ const CourierHome = () => {
 
       <OrdersList orders={openOrders} title={"Open Orders"} />
       <OrdersList orders={activeOrders} title={"Your active Orders"} />
-    </View>
+    </SafeAreaView>
   );
 };
 

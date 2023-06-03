@@ -8,7 +8,6 @@ import OrderQuotes from "../OrderQuotes";
 import ReviewForm from "./ReviewForm";
 
 const BaseUserOrderDetails = ({ orderDetails, orderQuotes }) => {
-  const { user } = useGlobalContext();
   return (
     <View style={styles.container}>
       <GeneralOrderInfo order={orderDetails} />

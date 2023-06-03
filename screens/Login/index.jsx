@@ -26,7 +26,7 @@ const Login = () => {
         email: email.toLowerCase(),
         password: password,
       });
-      console.log("response: ", response.data);
+
       addObjectToCache("user", response.data.user);
       setUser(response.data.user);
     } catch (error) {

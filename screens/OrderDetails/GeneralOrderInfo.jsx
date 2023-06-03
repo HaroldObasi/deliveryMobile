@@ -6,7 +6,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 
 const GeneralOrderInfo = ({ order }) => {
-  console.log("order data nest: ", order);
   const { user } = useGlobalContext();
   return (
     <View>
