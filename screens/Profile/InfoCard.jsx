@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import { useGlobalContext } from "../../context";
 import React from "react";
 import { Avatar } from "react-native-paper";
@@ -7,9 +7,25 @@ import { signout } from "./helpers";
 import Button from "../../components/ui/Button";
 import { theme } from "../../styles/theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { API_URL } from "../../apiConfig";
+import { useNavigation } from "@react-navigation/native";
 
 const InfoCard = () => {
   const { user, setUser } = useGlobalContext();
+  const navigation = useNavigation();
+
+  const handleCourierRequest = async () => {
+    try {
+      await API_URL.post(`application/create`, user);
+      Alert.alert("Request sent successfully");
+    } catch (error) {
+      Alert.alert("Something went wrong");
+      console.log(error);
+    } finally {
+      navigation.goBack();
+    }
+  };
+
   return (
     <View style={styles.card}>
       <Avatar.Text size={70} label={user.fullName[0]} />
@@ -24,16 +40,10 @@ const InfoCard = () => {
       </Text>
       {user.role === "USER" ? (
         <>
-          <Button
-            onPress={() => {
-              console.log("alt button");
-            }}
-          >
-            Request courier access
-          </Button>
+          <Button onPress={handleCourierRequest}>Request courier access</Button>
         </>
       ) : (
-        <Text>Role: Courier</Text>
+        <Text>Role: {user.role}</Text>
       )}
 
       <View
