@@ -1,16 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../../apiConfig";
 import InfoCard from "../InfoCard";
 import OrdersList from "../../../components/ui/OrdersList";
 import { useIsFocused } from "@react-navigation/native";
 import { useGlobalContext } from "../../../context";
+import { FAB } from "react-native-paper";
+import { signout } from "../helpers";
+import { theme } from "../../../styles/theme";
 
 const Courier = () => {
   const [deliveredOrders, setDeliveredOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { user } = useGlobalContext();
+  const { user, setUser } = useGlobalContext();
 
   const isFocused = useIsFocused();
 
@@ -34,13 +37,25 @@ const Courier = () => {
   }, [isFocused]);
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <InfoCard />
       <OrdersList orders={deliveredOrders} title={"Your completed orders"} />
-    </View>
+      <FAB icon="power" style={styles.fab} onPress={() => signout(setUser)} />
+    </SafeAreaView>
   );
 };
 
 export default Courier;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    height: "100%",
+  },
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: theme.colors.error.light,
+  },
+});
