@@ -3,6 +3,7 @@ import React from "react";
 import { useGlobalContext } from "../../context";
 import BaseUser from "./BaseUser";
 import Courier from "./Courier";
+import AdminProfile from "./Admin";
 
 const Profile = () => {
   const { user } = useGlobalContext();
@@ -12,6 +13,9 @@ const Profile = () => {
   }
   if (user.role === "COURIER") {
     return <Courier />;
+  }
+  if (user.role === "ADMIN") {
+    return <AdminProfile />;
   }
 
   return (
