@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useGlobalContext } from "../../context";
 import React from "react";
 import { theme } from "../../styles/theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const GeneralOrderInfo = ({ order }) => {
+  const navigation = useNavigation();
   const { user } = useGlobalContext();
   return (
     <View>
@@ -101,13 +103,20 @@ const GeneralOrderInfo = ({ order }) => {
             </Text>
           </View>
         ) : (
-          <Text style={{ marginVertical: 5 }}>
-            Assigned courier:{" "}
-            {order?.assignedCourier?.fullName || order?.assignedCourier?.email}
-          </Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("GuestProfile", order.assignedCourier._id)
+            }
+          >
+            <Text style={{ marginVertical: 5 }}>
+              Assigned courier:{" "}
+              {order?.assignedCourier?.fullName ||
+                order?.assignedCourier?.email}
+            </Text>
+          </TouchableOpacity>
         )
       ) : (
-        <Text>a courier</Text>
+        <></>
       )}
 
       <View>

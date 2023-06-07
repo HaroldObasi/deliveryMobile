@@ -71,7 +71,7 @@ const CreateOrder = () => {
         // scrollEnabled={false}
         keyboardShouldPersistTaps="handled"
       >
-        <Text>Add your package's information</Text>
+        <Text style={{}}>Add your package's information</Text>
         <TextInput
           label="Recipient Name"
           onChangeText={(text) => {
