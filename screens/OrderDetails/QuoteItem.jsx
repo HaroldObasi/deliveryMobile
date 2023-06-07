@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert, TouchableOpacity } from "react-native";
 import React from "react";
+import { Button as MButton } from "react-native-paper";
 import { theme } from "../../styles/theme";
 import Button from "../../components/ui/Button";
 import { useNavigation } from "@react-navigation/native";
@@ -29,9 +30,15 @@ const QuoteItem = ({ item }) => {
     <View style={styles.quoteItem}>
       <View>
         <View style={{ justifyContent: "space-between" }}>
-          <Text style={styles.quoteInfo}>
-            Created by: {item.createdBy.fullName || item.createdBy.email}
-          </Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("GuestProfile", item.createdBy._id)
+            }
+          >
+            <Text style={styles.quoteInfo}>
+              Created by: {item.createdBy.fullName || item.createdBy.email}
+            </Text>
+          </TouchableOpacity>
           <Text style={styles.quoteInfo}>Price ($): {item.quotePrice}</Text>
           <Text style={styles.quoteInfo}>
             Estimated time for delivery: {item.timeEstimate + " days"}

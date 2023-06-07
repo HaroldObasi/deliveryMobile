@@ -7,10 +7,13 @@ import OrdersList from "../../../components/ui/OrdersList";
 import { FAB } from "react-native-paper";
 import { theme } from "../../../styles/theme";
 import { signout } from "../helpers";
+import { useIsFocused } from "@react-navigation/native";
 
 const BaseUser = () => {
   const { user, setUser } = useGlobalContext();
   const [userPackages, setUserPackages] = useState([]);
+
+  const isFocused = useIsFocused();
 
   const fetchUserPackages = async () => {
     try {
@@ -22,8 +25,10 @@ const BaseUser = () => {
   };
 
   useEffect(() => {
-    fetchUserPackages();
-  }, []);
+    if (isFocused) {
+      fetchUserPackages();
+    }
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
