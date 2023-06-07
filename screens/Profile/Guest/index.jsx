@@ -71,8 +71,7 @@ const GuestProfile = ({ route }) => {
           </Text>
         </View>
       </View>
-      <View>
-        <Text>Ratings</Text>
+      <View style={{ paddingHorizontal: theme.font.spacing.xs }}>
         <RatingList ratings={userInfo?.reviews} />
       </View>
     </SafeAreaView>

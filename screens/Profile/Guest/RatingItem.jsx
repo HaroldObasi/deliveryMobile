@@ -8,6 +8,7 @@ const RatingItem = ({ item }) => {
   console.log("item: ", item);
   return (
     <View style={styles.container}>
+      <Text>Created by: {item.createdBy.email}</Text>
       <Stars
         default={item?.rating}
         count={5}
@@ -34,7 +35,15 @@ const RatingItem = ({ item }) => {
 export default RatingItem;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    borderWidth: 1,
+    borderColor: theme.colors.primary.main,
+    borderRadius: 8,
+    paddingHorizontal: theme.font.spacing.xs,
+    paddingVertical: theme.font.spacing.xs,
+  },
   myStarStyle: {
     color: "yellow",
     backgroundColor: "transparent",
